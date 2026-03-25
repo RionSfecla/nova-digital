@@ -1,0 +1,17 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="120" rx="24" fill="#111111"/>
+
+  <text x="24" y="78"
+        font-family="Inter, Poppins, Arial, sans-serif"
+        font-size="48"
+        font-weight="800"
+        fill="white">
+    ND
+  </text>
+
+  <text x="78" y="42"
+        font-size="28"
+        fill="#C9A86A">
+    ✦
+  </text>
+</svg>

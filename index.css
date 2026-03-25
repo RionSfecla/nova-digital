@@ -1,0 +1,156 @@
+@import "tailwindcss";
+/* src/index.css */
+html { scroll-behavior: smooth; }
+:root{
+  --bg:#0b0f19;
+  --card:#111827;
+  --text:#f9fafb;
+  --muted:#9ca3af;
+  --border:#1f2937;
+
+  --accent:#111827;
+  --accent2:#d4af37;
+
+  --surface: rgba(17,24,39,.8);
+  --shadow: 0 20px 40px rgba(0,0,0,.5);
+  --radius:18px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--text);
+  background: radial-gradient(1200px 600px at 20% 10%, rgba(201,168,106,.18), transparent 65%),
+              radial-gradient(900px 500px at 80% 0%, rgba(11,18,32,.10), transparent 55%),
+              var(--bg);
+}
+
+/* layout */
+.lux-wrap{
+  max-width: 1350px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.lux-app{
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle watermark (logo feel, pa pas nevojë image) */
+.lux-app::before{
+  content:"";
+  position:absolute;
+  inset:-200px -200px auto auto;
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle at 30% 30%, rgba(201,168,106,.18), transparent 55%),
+              radial-gradient(circle at 60% 60%, rgba(11,18,32,.10), transparent 60%);
+  filter: blur(0px);
+  opacity: .85;
+  pointer-events:none;
+  transform: rotate(12deg);
+}
+
+/* cards */
+.lux-card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow2);
+  backdrop-filter: blur(10px);
+}
+
+.lux-card:hover{
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  transition: .22s ease;
+}
+
+.lux-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(201,168,106,0.20);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* buttons */
+.lux-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #0b1220, #060b14);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 14px 30px rgba(11,18,32,.18);
+  text-decoration:none;
+  font-weight: 800;
+}
+
+.lux-btn:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  transition: .18s ease;
+}
+
+.lux-btn-outline{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: rgba(16, 20, 32, 0.78);
+  color: var(--text);
+  border: 1px solid var(--border);
+  text-decoration:none;
+  font-weight: 800;
+}
+
+.lux-btn-outline:hover{
+  transform: translateY(-1px);
+  transition: .18s ease;
+}
+
+/* inputs */
+.lux-input{
+  width:100%;
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  outline:none;
+  font-size: 14px;
+}
+
+.lux-input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+.lux-input:focus{
+  border-color: rgba(201,168,106,.60);
+  box-shadow: 0 0 0 6px rgba(201,168,106,.18);
+}
+
+/* header polish */
+header{
+  background: rgba(251,250,247,.78);
+  border-bottom: 1px solid rgba(11,18,32,.06);
+  backdrop-filter: blur(10px);
+}
+
+/* typography tweaks */
+h1{
+  letter-spacing: -0.03em;
+}
