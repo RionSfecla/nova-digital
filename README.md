@@ -18,5 +18,5 @@ Technologies Used
 - Vite
 - CSS
 
-Project Purpose
+Project Purpose:
 This project was built as a professional website concept for a digital agency, focused on clean design, responsiveness, and user experience.
