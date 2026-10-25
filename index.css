@@ -1,322 +1,156 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+/* src/index.css */
+html { scroll-behavior: smooth; }
+:root{
+  --bg:#0b0f19;
+  --card:#111827;
+  --text:#f9fafb;
+  --muted:#9ca3af;
+  --border:#1f2937;
 
-/* ------------------------------------------------------------------
-   Nova Digital — theme
-   Palette taken from the logo: deep indigo navy, light blue -> periwinkle
-   orbits, cyan (#22D3EE) "DIGITAL" text
-   ------------------------------------------------------------------ */
+  --accent:#111827;
+  --accent2:#d4af37;
 
-:root {
-  --bg: #0a0b22;
-  --surface: #121338;
-  --card: rgba(18, 20, 54, 0.72);
-  --text: #f1f3ff;
-  --muted: #a3abd1;
-  --border: rgba(130, 150, 255, 0.18);
-  --accent: #6f6bf4; /* periwinkle-violet — buttons, active states */
-  --accent2: #22d3ee; /* cyan — icons, highlights */
-  --blue: #4da3f5; /* light blue from the orbit start */
-  --radius-lg: 20px;
-  --radius-md: 12px;
+  --surface: rgba(17,24,39,.8);
+  --shadow: 0 20px 40px rgba(0,0,0,.5);
+  --radius:18px;
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 96px;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
   color: var(--text);
-  font-family: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  -webkit-font-smoothing: antialiased;
+  background: radial-gradient(1200px 600px at 20% 10%, rgba(201,168,106,.18), transparent 65%),
+              radial-gradient(900px 500px at 80% 0%, rgba(11,18,32,.10), transparent 55%),
+              var(--bg);
 }
 
-::selection {
-  background: rgba(34, 211, 238, 0.3);
-}
-
-.lux-app {
-  position: relative;
-  isolation: isolate;
-  min-height: 100vh;
-  color: var(--text);
-  background: var(--bg);
-}
-
-/* Blurred logo background (put the image at public/nova-bg.png).
-   Fixed pseudo-element instead of background-attachment: fixed,
-   which is buggy on iOS. Lower the overlay alpha values to show
-   more of the logo, raise them for more readability. */
-.lux-app::before {
-  content: "";
-  position: fixed;
-  inset: -60px; /* extra room so the blur doesn't fade at the edges */
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(rgba(10, 11, 34, 0.5), rgba(10, 11, 34, 0.82)),
-    url("/nova-bg.png") center / cover no-repeat;
-  filter: blur(18px);
-  transform: translateZ(0);
-}
-
-.lux-wrap {
-  max-width: 1120px;
-  margin-left: auto;
-  margin-right: auto;
+/* layout */
+.lux-wrap{
+  max-width: 1350px;
+  margin: 0 auto;
   padding-left: 24px;
   padding-right: 24px;
 }
 
-/* ---------- Header ---------- */
-.lux-header {
-  background: rgba(10, 11, 34, 0.6);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
+.lux-app{
+  position: relative;
+  overflow: hidden;
 }
 
-.lux-nav a {
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-.lux-nav a:hover {
-  color: var(--text);
+/* subtle watermark (logo feel, pa pas nevojë image) */
+.lux-app::before{
+  content:"";
+  position:absolute;
+  inset:-200px -200px auto auto;
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle at 30% 30%, rgba(201,168,106,.18), transparent 55%),
+              radial-gradient(circle at 60% 60%, rgba(11,18,32,.10), transparent 60%);
+  filter: blur(0px);
+  opacity: .85;
+  pointer-events:none;
+  transform: rotate(12deg);
 }
 
-.lux-switch {
-  display: flex;
-  align-items: center;
-  padding: 4px;
+/* cards */
+.lux-card{
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.04);
-}
-
-/* ---------- Buttons ---------- */
-.lux-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 20px;
-  border: 0;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--blue), var(--accent));
-  color: #fff;
-  font: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(99, 120, 245, 0.34);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
-}
-.lux-btn:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.08);
-  box-shadow: 0 12px 30px rgba(99, 120, 245, 0.45);
-}
-.lux-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.lux-btn-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 20px;
-  border: 1px solid rgba(34, 211, 238, 0.42);
-  border-radius: var(--radius-md);
-  background: transparent;
-  color: var(--text);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-.lux-btn-outline:hover {
-  background: rgba(34, 211, 238, 0.09);
-  border-color: rgba(34, 211, 238, 0.7);
-}
-
-.lux-btn:focus-visible,
-.lux-btn-outline:focus-visible,
-.lux-input:focus-visible,
-.lux-faq-btn:focus-visible,
-.lux-nav a:focus-visible {
-  outline: 2px solid var(--accent2);
-  outline-offset: 3px;
-}
-
-/* ---------- Surfaces ---------- */
-.lux-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow2);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
-.lux-card-featured {
-  border-color: rgba(34, 211, 238, 0.5);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(34, 211, 238, 0.18) inset,
-    0 0 60px rgba(34, 211, 238, 0.08);
+.lux-card:hover{
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  transition: .22s ease;
 }
 
-.lux-hero-card {
+.lux-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(201,168,106,0.20);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background:
-    radial-gradient(460px 240px at 10% 0%, rgba(34, 211, 238, 0.26), transparent 62%),
-    radial-gradient(420px 260px at 100% 100%, rgba(111, 107, 244, 0.38), transparent 62%),
-    linear-gradient(180deg, #151846, #0d1038);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-}
-
-.lux-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 14px;
-  border: 1px solid rgba(34, 211, 238, 0.3);
-  border-radius: 999px;
-  background: rgba(34, 211, 238, 0.08);
-  color: #7de3f4;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.lux-badge {
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #22d3ee, #60a5fa);
-  color: #031425;
+  color: var(--muted);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
-.lux-icon {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  flex: none;
-  border: 1px solid rgba(34, 211, 238, 0.28);
-  border-radius: var(--radius-md);
-  background: rgba(34, 211, 238, 0.08);
-  color: var(--accent2);
+/* buttons */
+.lux-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #0b1220, #060b14);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 14px 30px rgba(11,18,32,.18);
+  text-decoration:none;
+  font-weight: 800;
 }
 
-.lux-chip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.04);
-  font-size: 14px;
-  font-weight: 500;
+.lux-btn:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  transition: .18s ease;
 }
 
-/* ---------- Services (ruled list, not cards) ---------- */
-.lux-service {
-  display: flex;
-  gap: 20px;
-  padding: 28px 0;
-  border-top: 1px solid var(--border);
-}
-@media (min-width: 768px) {
-  .lux-service {
-    padding: 8px 28px 8px 0;
-    border-top: 0;
-    border-right: 1px solid var(--border);
-  }
-  .lux-service:last-child {
-    border-right: 0;
-  }
-  .lux-service + .lux-service {
-    padding-left: 28px;
-  }
-}
-
-/* ---------- Hero stats ---------- */
-.lux-stat {
-  padding-left: 16px;
-  border-left: 2px solid rgba(34, 211, 238, 0.45);
-}
-
-/* ---------- FAQ ---------- */
-.lux-faq-item {
-  border-bottom: 1px solid var(--border);
-}
-.lux-faq-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  width: 100%;
-  padding: 22px 0;
-  border: 0;
-  background: none;
+.lux-btn-outline{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: rgba(16, 20, 32, 0.78);
   color: var(--text);
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-.lux-faq-btn:hover .lux-faq-q {
-  color: var(--accent2);
-}
-.lux-faq-q {
-  transition: color 0.15s ease;
+  border: 1px solid var(--border);
+  text-decoration:none;
+  font-weight: 800;
 }
 
-/* ---------- Forms ---------- */
-.lux-input {
-  width: 100%;
-  box-sizing: border-box;
+.lux-btn-outline:hover{
+  transform: translateY(-1px);
+  transition: .18s ease;
+}
+
+/* inputs */
+.lux-input{
+  width:100%;
   padding: 13px 14px;
+  border-radius: 14px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: rgba(10, 11, 34, 0.65);
+  background: rgba(255,255,255,0.06);
   color: var(--text);
-  font: inherit;
+  outline:none;
   font-size: 14px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
+
 .lux-input::placeholder {
-  color: #6b7699;
+  color: rgba(255,255,255,0.5);
 }
-.lux-input:focus {
-  outline: none;
-  border-color: rgba(34, 211, 238, 0.7);
-  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.16);
-}
-.lux-input:disabled {
-  opacity: 0.6;
+.lux-input:focus{
+  border-color: rgba(201,168,106,.60);
+  box-shadow: 0 0 0 6px rgba(201,168,106,.18);
 }
 
-.lux-footer {
-  border-top: 1px solid var(--border);
+/* header polish */
+header{
+  background: rgba(251,250,247,.78);
+  border-bottom: 1px solid rgba(11,18,32,.06);
+  backdrop-filter: blur(10px);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .lux-btn,
-  .lux-btn-outline,
-  .lux-input {
-    transition: none;
-  }
+/* typography tweaks */
+h1{
+  letter-spacing: -0.03em;
 }
