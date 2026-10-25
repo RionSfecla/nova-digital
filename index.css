@@ -3,19 +3,20 @@
 
 /* ------------------------------------------------------------------
    Nova Digital — theme
-   Palette taken from the logo: ink navy, cyan (#22D3EE), violet (#6D5EF3)
+   Palette taken from the logo: deep indigo navy, light blue -> periwinkle
+   orbits, cyan (#22D3EE) "DIGITAL" text
    ------------------------------------------------------------------ */
 
 :root {
-  --bg: #070b18;
-  --surface: #0e1530;
-  --card: rgba(15, 22, 48, 0.78);
-  --text: #eef2ff;
-  --muted: #9aa6c7;
-  --border: rgba(148, 163, 255, 0.16);
-  --accent: #6d5ef3; /* violet — buttons, active states */
+  --bg: #0a0b22;
+  --surface: #121338;
+  --card: rgba(18, 20, 54, 0.72);
+  --text: #f1f3ff;
+  --muted: #a3abd1;
+  --border: rgba(130, 150, 255, 0.18);
+  --accent: #6f6bf4; /* periwinkle-violet — buttons, active states */
   --accent2: #22d3ee; /* cyan — icons, highlights */
-  --blue: #3b82f6;
+  --blue: #4da3f5; /* light blue from the orbit start */
   --radius-lg: 20px;
   --radius-md: 12px;
 }
@@ -38,12 +39,28 @@ body {
 }
 
 .lux-app {
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
   color: var(--text);
+  background: var(--bg);
+}
+
+/* Blurred logo background (put the image at public/nova-bg.png).
+   Fixed pseudo-element instead of background-attachment: fixed,
+   which is buggy on iOS. Lower the overlay alpha values to show
+   more of the logo, raise them for more readability. */
+.lux-app::before {
+  content: "";
+  position: fixed;
+  inset: -60px; /* extra room so the blur doesn't fade at the edges */
+  z-index: -1;
+  pointer-events: none;
   background:
-    radial-gradient(900px 520px at 88% -8%, rgba(109, 94, 243, 0.26), transparent 62%),
-    radial-gradient(760px 420px at -5% 6%, rgba(34, 211, 238, 0.12), transparent 58%),
-    var(--bg);
+    linear-gradient(rgba(10, 11, 34, 0.5), rgba(10, 11, 34, 0.82)),
+    url("/nova-bg.png") center / cover no-repeat;
+  filter: blur(18px);
+  transform: translateZ(0);
 }
 
 .lux-wrap {
@@ -56,7 +73,7 @@ body {
 
 /* ---------- Header ---------- */
 .lux-header {
-  background: rgba(7, 11, 24, 0.82);
+  background: rgba(10, 11, 34, 0.6);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
@@ -96,13 +113,13 @@ body {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(79, 102, 245, 0.32);
+  box-shadow: 0 8px 24px rgba(99, 120, 245, 0.34);
   transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 .lux-btn:hover {
   transform: translateY(-1px);
   filter: brightness(1.08);
-  box-shadow: 0 12px 30px rgba(79, 102, 245, 0.42);
+  box-shadow: 0 12px 30px rgba(99, 120, 245, 0.45);
 }
 .lux-btn:disabled {
   opacity: 0.6;
@@ -162,8 +179,8 @@ body {
   border-radius: var(--radius-lg);
   background:
     radial-gradient(460px 240px at 10% 0%, rgba(34, 211, 238, 0.26), transparent 62%),
-    radial-gradient(420px 260px at 100% 100%, rgba(109, 94, 243, 0.34), transparent 62%),
-    linear-gradient(180deg, #111a3d, #0b1230);
+    radial-gradient(420px 260px at 100% 100%, rgba(111, 107, 244, 0.38), transparent 62%),
+    linear-gradient(180deg, #151846, #0d1038);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
 }
 
@@ -271,7 +288,7 @@ body {
   padding: 13px 14px;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: rgba(7, 11, 24, 0.65);
+  background: rgba(10, 11, 34, 0.65);
   color: var(--text);
   font: inherit;
   font-size: 14px;
