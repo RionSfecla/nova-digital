@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from "react";
-import "./lux-theme.css";
 
 type Lang = "sq" | "en";
 
